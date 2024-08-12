@@ -1,6 +1,5 @@
 using Azure.Storage.Blobs;
 using ClosedXML.Excel;
-using Grpc.Core;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.Cosmos;
