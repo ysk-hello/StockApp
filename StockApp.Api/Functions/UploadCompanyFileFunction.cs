@@ -48,7 +48,7 @@ namespace StockApp.Api.Functions
 
                 var dbConnectionString = Environment.GetEnvironmentVariable("DbConnectionString");
                 var dbName = Environment.GetEnvironmentVariable("DbName");
-                var dbContainerName = Environment.GetEnvironmentVariable("DbContainerName");
+                var dbContainerName = Environment.GetEnvironmentVariable("DbCompaniesContainerName");
                 var client = new CosmosClient(dbConnectionString);
                 var dbContainer = client.GetContainer(dbName, dbContainerName);
 
