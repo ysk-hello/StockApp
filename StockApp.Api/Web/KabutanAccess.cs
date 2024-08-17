@@ -1,6 +1,7 @@
 ﻿using AngleSharp;
 using AngleSharp.Dom;
 using StockApp.Api.Models;
+using System.Globalization;
 
 namespace StockApp.Api.Web
 {
@@ -50,7 +51,7 @@ namespace StockApp.Api.Web
                     data.AddRange(saveData);
                 }
 
-                Thread.Sleep(10 * 1000);
+                await Task.Delay(1000);
             }
 
             return data.OrderBy(c => c.Date).ToList();
@@ -69,7 +70,8 @@ namespace StockApp.Api.Web
                 if (th == null) continue;
                 if (tds?.Count() != 7) continue;
 
-                if (DateTime.TryParse(th.TextContent, out DateTime date))
+                // Azure上では、「CultureInfo=en-US」になるので注意
+                if (DateTime.TryParseExact(th.TextContent, "yy/MM/dd", CultureInfo.GetCultureInfo("ja-JP"), DateTimeStyles.None, out var date))
                 {
                     if (double.TryParse(tds[0].TextContent, out double open) &&
                         double.TryParse(tds[1].TextContent, out double high) &&
