@@ -35,7 +35,12 @@ namespace StockApp.Api.Functions
                 companies.AddRange(response.ToList());
             }
 
-            return new OkObjectResult(companies);
+            var responseModel = companies.Select(c => new
+            {
+                code = c.Code,
+                name = c.Name
+            });
+            return new OkObjectResult(responseModel);
         }
     }
 }
